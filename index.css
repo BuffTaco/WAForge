@@ -118,5 +118,7 @@
     background-color: #aabd8c;
     font-family: 'Courier New', Courier, monospace;
   }
-  
+  .invis {
+    background:none; border:none;
+  }
   

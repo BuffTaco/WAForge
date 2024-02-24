@@ -25,4 +25,25 @@ const getResponse = async () => {
     console.log(dishes);
     
 };
-getResponse();
+const getRecipe = async () => {
+    const response = await openai.chat.completions.create ({
+        model: 'gpt-3.5-turbo',
+        messages: [
+            {
+                role: 'user',
+                content: 'give JSON array of steps for Cod with Garlic Butter recipe without linebreaks',
+            },
+        ],
+        temperature: 0,
+        max_tokens: 500,
+        top_p: .1,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+    });
+    const raw = response.choices[0].message.content
+    const processed = JSON.parse(raw);
+    console.log(processed[0]);
+    
+}
+getRecipe();
+//getResponse();
