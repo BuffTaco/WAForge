@@ -1,18 +1,16 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
-
-
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
-const getResponse = async () => {
+const getResponse = async (ingredients) => {
     const response = await openai.chat.completions.create ({
         model: 'gpt-3.5-turbo',
         messages: [
             {
                 role: 'user',
-                content: 'return a list of names of dishes using turkey, peas, and potatoes',
+                content: `return a list of names of dishes using ${ingredients} in json format`,
             },
         ],
         temperature: 0,
@@ -22,15 +20,21 @@ const getResponse = async () => {
         presence_penalty: 0.0,
     });
     console.log(response.choices[0].message);
+    
+    
 };
 
 const test = document.querySelector('#test');
 test.addEventListener("click" , () => {
     console.log("test button");
 });
-const api = document.querySelector('#api');
-api.addEventListener("click", () => {
-    getResponse();
+const form = document.querySelector('#recipe');
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const ingredients = document.getElementById('ingredients').value;
+
+    console.log(ingredients);
+    form.reset();
 })
 },{"openai":12}],2:[function(require,module,exports){
 'use strict'
