@@ -12,7 +12,7 @@ const getResponse = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'return json format list of 10 dishes names and protein content in grams using chocolate, bread, and eggs without linebreaks',
+                content: 'return json object with list of 10 dishes names, protein and sugar content in grams, and calories using wheat, tomato, eggs without linebreaks',
             },
         ],
         temperature: 0,
@@ -21,6 +21,8 @@ const getResponse = async () => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    console.log(response.choices[0].message);
+    const dishes = JSON.parse(response.choices[0].message.content)["dishes"];
+    console.log(dishes);
+    
 };
 getResponse();

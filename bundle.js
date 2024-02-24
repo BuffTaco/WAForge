@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -15,7 +15,7 @@ const getResponse = async (ingredients) => {
         messages: [
             {
                 role: 'user',
-                content: `return json format list of 10 dishes names and protein content in grams using ${ingredients} without linebreaks`,
+                content: `return json object with list of 10 dishes names, protein and sugar content in grams, and calories using ${ingredients} without linebreaks`,
             },
         ],
         temperature: 0,
@@ -24,11 +24,13 @@ const getResponse = async (ingredients) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    console.log(response.choices[0].message);
-    const resRaw = response.choices[0].message.content;
-    console.log(resRaw)
+   
+    const resRaw = JSON.parse(response.choices[0].message.content);
+    console.log(resRaw);
     
-    objs = JSON.parse(resRaw)["dishes"];
+    
+    objs = resRaw["dishes"];
+    
     names = objs.map((obj) => obj.name);
     console.log(objs);
     console.log(names);
@@ -38,6 +40,7 @@ const getResponse = async (ingredients) => {
     
     
 };
+//handle search
 const recipeForm = document.querySelector('#recipe');
 recipeForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -47,39 +50,93 @@ recipeForm.addEventListener("submit", (event) => {
     recipeForm.reset();
 })
 
-//show list of ingredients
-const showList = () => {
-    const recipeList = document.getElementById('recipeList');
-    for (let i = 0; i < names.length; i++)
-    {
-        recipeList.innerHTML += `<li>${names[i]}</li>`
-    }
-}
+
 
 //change sorting value
 let selected = "none";
 const valuesForm = document.querySelector('#sortValue');
 valuesForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    const sortedBy = document.querySelector('#sortedBy');
     const selectValues = document.querySelector('#values');
+    
+
+    
 
     selected = selectValues.value;
     console.log("submitted");
     console.log(selected);
-    sortObjs(objs);
+
+    switch (selected) {
+        case "protein":
+            sortedBy.innerHTML = "Sorted by: Protein " + (ascend == true ? "Ascending" : "Descending");
+            break;
+        case "sugar":
+            sortedBy.innerHTML = "Sorted by: Sugar " + (ascend == true ? "Ascending" : "Descending");
+            break;
+        case "calories":
+            sortedBy.innerHTML = "Sorted by: Calories "  + (ascend == true ? "Ascending" : "Descending");
+            break;
+        case "unsorted":
+            sortedBy.innerHTML = "Sorted by: None";
+    
+
+    }
+    sortObjs(objs, selected);
 })
 
-//sort by value
-const sortObjs = (objs) => {
-    if (objs.length != 0)
+//show list of ingredients
+const showList = () => {
+    const recipeList = document.getElementById('recipeList');
+    recipeList.innerHTML = "";
+    for (let i = 0; i < names.length; i++)
     {
-        console.log("not empty");
-        console.log(objs);
-    }
-    else {
-        console.log("empty");
+        recipeList.innerHTML += `<li>${names[i]}</li>`
     }
 }
+
+
+
+let ascend = true;
+//sort by value
+const sortObjs = (objs, value) => {
+    const sortType = document.getElementById('sortType');
+    if (sortType.checked)
+    {
+        ascend = false;
+        console.log("wow");
+    }
+    if (!sortType.checked)
+    {
+        ascend = true;
+        console.log("aw");
+    }
+
+    if (objs.length != 0)
+    {
+        
+        if (value != "unsorted")
+        {
+            if (ascend == true)
+            {
+            objs.sort((a, b) => {
+                return a[value] - b[value];
+            })
+            }   
+            else
+            {
+                objs.sort((a, b) => {
+                    return b[value] - a[value];
+                })
+            }
+            names = objs.map((obj) => obj.name);
+        }
+        
+        
+    }
+    showList();
+}
+
 
 },{"openai":12}],2:[function(require,module,exports){
 'use strict'
