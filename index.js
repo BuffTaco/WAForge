@@ -119,12 +119,12 @@ const sortObjs = (objs, value) => {
     if (sortType.checked)
     {
         ascend = false;
-        console.log("wow");
+        
     }
     if (!sortType.checked)
     {
         ascend = true;
-        console.log("aw");
+        
     }
 
     if (objs.length != 0)
