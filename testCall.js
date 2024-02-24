@@ -12,7 +12,7 @@ const getResponse = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'return a list of names of dishes using turkey, peas, and potatoes in json format',
+                content: 'return json format list of 10 dishes names and protein content in grams using chocolate, bread, and eggs without linebreaks',
             },
         ],
         temperature: 0,

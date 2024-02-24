@@ -10,7 +10,9 @@
         
     </head>
     <body>
-        
+        <ol id="recipeList">
+            
+        </ol>
         <button id="test"><i>The button</i></button>
         
         <a href="other.html"><button>Switch</button></a>
@@ -18,6 +20,15 @@
             <label for="ingredients">Ingredients:</label>
             <input type="text" id="ingredients" name="ingredients"/>
             <button type="submit">Search</button>
+        </form>
+        <form id="sortValue">
+            <label for="values">Sort by:</label>
+            <select name="values" id="values">
+                <option value="protein">Protein</option>
+                <option value="sugar">Sugar</option>
+                <option value="calories">Calories</option>
+            </select>
+            <button type="submit">Confirm</button>
         </form>
 
         <script src="bundle.js"></script>
