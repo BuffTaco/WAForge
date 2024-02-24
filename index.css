@@ -44,14 +44,79 @@
 
   h1 {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 50px;
+    font-size: 75px;
     margin: 0px;
-    padding: 300px 0;
+    padding-top: 15%;
+    padding-left: 3%;
     color:#381d2a;
-    width: 30%;
+    width: 35%;
     white-space: normal;
     word-break: break-word;
     
   }
-
+  .startButton {
+    background-color: #aabd8c; 
+    display: inline-block;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 20px;
+    width: 200px;
+    margin-top: 2%;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.5s;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  .startButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .startButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  .startButton:hover {
+    cursor: pointer;
+    background-color:#86a578;
+  }
+  .startButton:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
+  #wtv {
+    margin-left: 3%;
+    margin-right: 1%;
+  }
+  img {
+    border-radius: 8px;
+    position: absolute;
+    top:5%;
+    right:4%;
+  }
+  #ingredients {
+    background-color: rgb(239, 239, 239);
+    width: 15%;
+    height: 20px;
+    margin-top: 25%;
+  }
+  label {
+    font-size: 40px;
+    font-family:'Courier New', Courier, monospace;
+    color:#381d2a;
+  }
+  .searchButton {
+    background-color: #aabd8c;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
   
