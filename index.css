@@ -113,6 +113,7 @@
   }
   label {
     font-size: 40px;
+    font-weight: bold;
     font-family:'Courier New', Courier, monospace;
     color:#381d2a;
   }
@@ -143,5 +144,21 @@
   }
   .invis {
     background:none; border:none;
+  }
+
+  
+  #stepsList {
+    position: relative;
+    font-family: 'Courier New', Courier, monospace;
+    color: #381d2a;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 1%;
+  }
+  body {
+    background-image: url("clipboard.png");
+    background-repeat: no-repeat;
+    background-size: 720px;
+    background-position: 103% -5%;
   }
   
