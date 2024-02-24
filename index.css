@@ -141,5 +141,7 @@
     border-radius: 5px;
     border-width: 2px;
   }
-  
+  .invis {
+    background:none; border:none;
+  }
   

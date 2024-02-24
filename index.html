@@ -22,6 +22,7 @@
         <h3 id="sortedBy">Sorted by: None</h3>
         <ol id="recipeList">
             
+            
         </ol>
         
         <form id="recipe">
@@ -32,6 +33,7 @@
         <form id="sortValue">
             <label for="values">Sort by:</label>
             <select name="values" class="options" id="values">
+                <option value="unsorted">Unsorted</option>
                 <option value="protein">Protein</option>
                 <option value="sugar">Sugar</option>
                 <option value="calories">Calories</option>
@@ -41,7 +43,11 @@
             <label for="sortType">Descending</label>
             <input class="check" type="checkbox" id="sortType"/>
         </form>
-        
+        <div id="steps">
+            <ol id="stepsList">
+            
+            </ol>
+        </div>
 
         <script src="bundle.js"></script>
         

@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -52,7 +52,7 @@ recipeForm.addEventListener("submit", (event) => {
 
 
 //change sorting value
-let selected = "none";
+let selected = "unsorted";
 const valuesForm = document.querySelector('#sortValue');
 valuesForm.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -90,12 +90,28 @@ const showList = () => {
     recipeList.innerHTML = "";
     for (let i = 0; i < names.length; i++)
     {
-        recipeList.innerHTML += `<li>${names[i]}</li>`
+        let temp = `<li><button class="invis">${names[i]}`
+        
+        switch (selected)
+        {
+            case "protein":
+                temp += ` (${objs[i]["protein"]}g)`;
+                break;
+            case "sugar":
+                temp += ` (${objs[i]["sugar"]}g)`;
+                break;
+            case "calories":
+                temp += ` (${objs[i]["calories"]})`;
+                break;
+            
+
+        }
+        recipeList.innerHTML += temp;
+        recipeList.innerHTML += '</button></li>';
+        
     }
+    recipeClicks();
 }
-
-
-
 let ascend = true;
 //sort by value
 const sortObjs = (objs, value) => {
@@ -135,4 +151,46 @@ const sortObjs = (objs, value) => {
     }
     showList();
 }
+//give each listed item an onClick
+const recipeClicks = () => {
+    const listItems = document.getElementsByClassName('invis')
+    
+    
+    for (let i = 0; i < listItems.length; i++)
+    {
+        listItems[i].addEventListener('click', () => {
+            
+            getRecipe(listItems[i].innerText)
+            
+        })
+    }
+}
 
+//get recipe of selected item
+const getRecipe = async (name) => {
+    const stepsContainer = document.getElementById('stepsList');
+    console.log(name);
+
+    const response = await openai.chat.completions.create ({
+        model: 'gpt-3.5-turbo',
+        messages: [
+            {
+                role: 'user',
+                content: `give JSON array of steps for ${name} recipe`,
+            },
+        ],
+        temperature: 0,
+        max_tokens: 500,
+        top_p: .1,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+    });
+    const steps = JSON.parse(response.choices[0].message.content)["steps"];
+    console.log(steps);
+    for (let i = 0; i < steps.length; i++)
+    {
+        console.log(steps[i]);
+        stepsContainer.innerHTML += `<li>${steps[i]}</li>`;
+    }
+    
+}
