@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -119,12 +119,12 @@ const sortObjs = (objs, value) => {
     if (sortType.checked)
     {
         ascend = false;
-        console.log("wow");
+        
     }
     if (!sortType.checked)
     {
         ascend = true;
-        console.log("aw");
+        
     }
 
     if (objs.length != 0)
