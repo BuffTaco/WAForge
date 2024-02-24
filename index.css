@@ -1,3 +1,4 @@
+
 .dropbtn {
     background-color: #3E6990;
     color: white;
@@ -107,16 +108,38 @@
     background-color: rgb(239, 239, 239);
     width: 15%;
     height: 20px;
-    margin-top: 25%;
+    margin-top: 2%;
+    border-radius: 5px;
   }
   label {
     font-size: 40px;
     font-family:'Courier New', Courier, monospace;
     color:#381d2a;
   }
+  #sortedBy {
+    font-family: 'Courier New', Courier, monospace;
+
+  }
   .searchButton {
     background-color: #aabd8c;
     font-family: 'Courier New', Courier, monospace;
+    border-color: #381d2a;
+    border-radius: 5px;
+    height: 20px;
+  }
+  .check {
+    height: 25px;
+    width: 25px;
+
+  }
+  select {
+    background-color: rgb(239, 239, 239);
+    width: 15%;
+    height:25px;
+    font-family: 'Courier New', Courier, monospace;
+    border-color: #381d2a;
+    border-radius: 5px;
+    border-width: 2px;
   }
   
   
