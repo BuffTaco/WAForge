@@ -114,8 +114,11 @@ img {
 }
 label {
   font-size: 40px;
+  font-weight: bold;
   font-family:'Courier New', Courier, monospace;
   color:#381d2a;
+  margin-left: 30%;
+  margin-top: 8%;
 }
 #sortedBy {
   font-family: 'Courier New', Courier, monospace;
