@@ -109,10 +109,13 @@
   }
   #ingredients {
     background-color: rgb(239, 239, 239);
-    width: 15%;
+    width: 15vw;
     height: 20px;
     margin-top: 2%;
+    margin-right: 1%;
+    margin-bottom: 1.5%;
     border-radius: 5px;
+    
   }
   label {
     font-size: 40px;
@@ -179,13 +182,12 @@
   .form-container {
     display: flex;
     align-items: center;
-    position: relative; 
+    position: relative;
+    width: 117%;
+     
   }
 
-  #ingredients{
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
+  
 
   .spinner {
       border: 8px solid transparent;
