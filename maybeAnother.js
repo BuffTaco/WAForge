@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 const dishForm = document.querySelector('#recipe');
