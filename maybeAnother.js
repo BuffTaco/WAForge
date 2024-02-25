@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 const dishForm = document.querySelector('#recipe');
@@ -28,5 +28,13 @@ const oneRecipe = async (dish) => {
     });
     const raw = response.choices[0].message.content;
     console.log(raw);
+
+    const processed = JSON.parse(raw);
+    console.log(processed);
+    const dishDesc = document.getElementById('dishDesc');
+    //dishDesc.innerHTML += `<h2>${processed[0]}</h2>`
+    /*
+    [0], access by name
+     */
     
 }
