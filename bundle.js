@@ -11,7 +11,7 @@ let names = [];
 
 const getResponse = async (ingredients) => {
     let response;
-    try {
+    
         response = await openai.chat.completions.create ({
         model: 'gpt-3.5-turbo',
         messages: [
@@ -26,31 +26,12 @@ const getResponse = async (ingredients) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-}
-    catch (e) {
-        console.log(e);
-        openai = new OpenAI({
-            apiKey: "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",
-            dangerouslyAllowBrowser: true
-        });
-        response = await openai.chat.completions.create ({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                {
-                    role: 'user',
-                    content: `return json object with list of 10 dishes names, protein and sugar content in grams, and calories using ${ingredients} without linebreaks`,
-                },
-            ],
-            temperature: 0,
-            max_tokens: 500,
-            top_p: .1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0,
-        });
 
         
 
-    }
+        
+
+    
    
     const resRaw = JSON.parse(response.choices[0].message.content);
     console.log(resRaw);
@@ -205,7 +186,7 @@ let steps = [];
 //get recipe of selected item
 const getRecipe = async (name, item) => {
     let response;
-    try {
+    
         response = await openai.chat.completions.create ({
             model: 'gpt-3.5-turbo',
             messages: [
@@ -220,29 +201,9 @@ const getRecipe = async (name, item) => {
             frequency_penalty: 0.0,
             presence_penalty: 0.0,
         });
-    }
-    catch (e) {
-        console.log(e);
-        openai = new OpenAI({
-            apiKey: "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",
-            dangerouslyAllowBrowser: true
-        });
-
-        response = await openai.chat.completions.create ({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                {
-                    role: 'user',
-                    content: `give JSON array of steps with no numbers for ${name} recipe with no linebreaks`,
-                },
-            ],
-            temperature: 0,
-            max_tokens: 500,
-            top_p: .1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0,
-        });
-    }
+    
+        
+    
     
     
     steps = JSON.parse(response.choices[0].message.content);

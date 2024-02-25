@@ -1,19 +1,23 @@
 const OpenAI = require("openai");
 let openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
+const spinner = document.querySelector('.spinner');
 const dishForm = document.querySelector('#recipe');
 dishForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const dish = document.getElementById("dish").value;
+    spinner.style.visibility = "visible";
     oneRecipe(dish);
     
     dishForm.reset();
 })
 const oneRecipe = async (dish) => {
+    
+    
     let response;
-    try {
+    
         response = await openai.chat.completions.create ({
             model: 'gpt-3.5-turbo',
             messages: [
@@ -28,28 +32,8 @@ const oneRecipe = async (dish) => {
             frequency_penalty: 0.0,
             presence_penalty: 0.0,
         });
-    }
-    catch (e) {
-        openai = new OpenAI({
-            apiKey: "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",
-            dangerouslyAllowBrowser: true
-        })
-        response = await openai.chat.completions.create ({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                {
-                    role: 'user',
-                    content: `give json of ${dish} serving size and nutritional facts with no linebreaks and no whitespace`,
-                },
-            ],
-            temperature: 0,
-            max_tokens: 500,
-            top_p: .1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0,
-        });
-
-    }
+    
+    
     
     const raw = response.choices[0].message.content;
     console.log(raw);
@@ -61,6 +45,8 @@ const oneRecipe = async (dish) => {
     let nutri;
     dishDesc.innerHTML += `<h3>${dish.toUpperCase()}:</h3>`
     
+    
+    spinner.style.visibility = "hidden";
     if (typeof processed[0] == "string")
     {
         nutri = processed[1];
