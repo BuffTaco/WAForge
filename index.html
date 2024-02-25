@@ -21,15 +21,17 @@
         
         <h3 id="sortedBy">Sorted by: None</h3>
         
-        
-        <form id="recipe">
-            <label for="ingredients">Ingredients:</label>
-            <input type="text" id="ingredients" name="ingredients"/>
-            <button class="searchButton" type="submit">Search</button>
-            
-        </form>
-        <div class="spinner"></div>
-        
+        <div class="container">
+            <form id="recipe">
+                <div class="form-container">
+                    <label for="ingredients">Ingredients:</label>
+                    <input type="text" id="ingredients" name="ingredients"/>
+                    <button class="searchButton" type="submit">Search</button>
+                    <div class="spinner"></div>
+                </div>
+            </form>
+        </div>
+
         <form id="sortValue">
             <label for="values">Sort by:</label>
             <select name="values" class="options" id="values">
