@@ -146,7 +146,13 @@
     border-width: 2px;
   }
   .invis {
-    background:none; border:none;
+    background:none;
+     border:none;
+     cursor: pointer;
+  }
+  .invis:hover {
+    text-decoration: underline;
+    color: rgb(105, 102, 9)
   }
 
   
@@ -172,7 +178,7 @@
       width: 25px;
       height: 25px;
       animation: spin 1s linear infinite;
-      display: none;
+      visibility: hidden;
   }
   .spinnerSmall {
     border: 8px solid transparent;
@@ -181,7 +187,7 @@
       width: 5px;
       height: 5px;
       animation: spin 1s linear infinite;
-      display: block;
+      display: none;
   }
   
 

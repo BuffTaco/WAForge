@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -49,7 +49,7 @@ recipeForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const ingredients = document.getElementById('ingredients').value;
     
-    spinner.style.display = "block";
+    spinner.style.visibility = "visible";
 
     getResponse(ingredients);
     recipeForm.reset();
@@ -117,7 +117,7 @@ const showList = () => {
         
     }
     recipeClicks();
-    spinner.style.display = "none";
+    spinner.style.visibility = "hidden";
 }
 let ascend = true;
 //sort by value
@@ -202,16 +202,16 @@ const showRecipe = (item) => {
     const stepsContainer = document.getElementById('stepsList');
     
     item.innerHTML = item.innerHTML.replace('<div class="spinnerSmall"></div>', '');
-    console.log(item);
-    console.log(item.innerHTML);
     stepsContainer.innerHTML = "";
-    console.log(steps);
+    const stepsOuter = document.getElementById('steps');
+    stepsOuter.innerHTML += item.innerText;
 
     for (let i = 0; i < steps.length; i++)
     {
         
         stepsContainer.innerHTML += `<li>${steps[i]}</li>`;
     }
+    console.log(stepsContainer.innerHTML);
 }
 
 },{"openai":12}],2:[function(require,module,exports){
