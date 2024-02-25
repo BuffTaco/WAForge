@@ -155,7 +155,7 @@
   }
   .invis:hover {
     text-decoration: underline;
-    color: rgb(105, 102, 9)
+    color: #aabd8c
   }
 
   
@@ -165,12 +165,21 @@
     color: #381d2a;
     font-size: 20px;
     font-weight: bold;
-    margin-right: 1%;
+    padding-right: 10%;
+    padding-left: 64%;
+    margin-top: -27%;
+
+  }
+  #recipeList {
+    font-family: 'Courier New', Courier, monospace;
+    color: #381d2a;
+    font-size: 40px;
+    font-weight: bold;
   }
   body {
     background-image: url("clipboard.png");
     background-repeat: no-repeat;
-    background-size: 720px;
+    background-size: 780px;
     background-position: 103% -5%;
   }
 
@@ -190,19 +199,19 @@
   
 
   .spinner {
-      border: 8px solid transparent;
-      border-top-color: #7983ff;
+      border: 6px solid transparent;
+      border-top-color: #f39b6d;
       border-radius: 50%;
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
       animation: spin 1s linear infinite;
       visibility: hidden;
       position: absolute;
-      right: 35px;
+      right: 40px;
   }
   .spinnerSmall {
     border: 8px solid transparent;
-      border-top-color: #7983ff;
+      border-top-color: #f39b6d;
       border-radius: 50%;
       width: 5px;
       height: 5px;
