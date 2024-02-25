@@ -1,20 +1,24 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 let openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
+const spinner = document.querySelector('.spinner');
 const dishForm = document.querySelector('#recipe');
 dishForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const dish = document.getElementById("dish").value;
+    spinner.style.visibility = "visible";
     oneRecipe(dish);
     
     dishForm.reset();
 })
 const oneRecipe = async (dish) => {
+    
+    
     let response;
-    try {
+    
         response = await openai.chat.completions.create ({
             model: 'gpt-3.5-turbo',
             messages: [
@@ -29,28 +33,8 @@ const oneRecipe = async (dish) => {
             frequency_penalty: 0.0,
             presence_penalty: 0.0,
         });
-    }
-    catch (e) {
-        openai = new OpenAI({
-            apiKey: "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",
-            dangerouslyAllowBrowser: true
-        })
-        response = await openai.chat.completions.create ({
-            model: 'gpt-3.5-turbo',
-            messages: [
-                {
-                    role: 'user',
-                    content: `give json of ${dish} serving size and nutritional facts with no linebreaks and no whitespace`,
-                },
-            ],
-            temperature: 0,
-            max_tokens: 500,
-            top_p: .1,
-            frequency_penalty: 0.0,
-            presence_penalty: 0.0,
-        });
-
-    }
+    
+    
     
     const raw = response.choices[0].message.content;
     console.log(raw);
@@ -62,6 +46,8 @@ const oneRecipe = async (dish) => {
     let nutri;
     dishDesc.innerHTML += `<h3>${dish.toUpperCase()}:</h3>`
     
+    
+    spinner.style.visibility = "hidden";
     if (typeof processed[0] == "string")
     {
         nutri = processed[1];

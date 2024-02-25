@@ -159,3 +159,32 @@ select {
   font-weight: bold;
   margin-right: 1%;
 }
+.spinner {
+  border: 6px solid transparent;
+  border-top-color: #f39b6d;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  visibility: hidden;
+  position: absolute;
+  top: 5px;
+  left: 500px;
+}
+@keyframes spin {
+  to {
+      transform: rotate(360deg);
+  }
+}
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 117%;
+   
+}
