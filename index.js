@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -202,8 +202,7 @@ const showRecipe = (item) => {
     
     item.innerHTML = item.innerHTML.replace('<div class="spinnerSmall"></div>', '');
     stepsContainer.innerHTML = "";
-    const stepsOuter = document.getElementById('steps');
-    stepsOuter.innerHTML += item.innerText;
+    
 
     for (let i = 0; i < steps.length; i++)
     {
