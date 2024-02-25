@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -120,12 +120,12 @@ const sortObjs = (objs, value) => {
     if (sortType.checked)
     {
         ascend = false;
-        console.log("wow");
+        
     }
     if (!sortType.checked)
     {
         ascend = true;
-        console.log("aw");
+        
     }
 
     if (objs.length != 0)
@@ -167,17 +167,18 @@ const recipeClicks = () => {
     }
 }
 
+let steps = [];
 //get recipe of selected item
 const getRecipe = async (name) => {
-    const stepsContainer = document.getElementById('stepsList');
-    console.log(name);
+    
+    
 
     const response = await openai.chat.completions.create ({
         model: 'gpt-3.5-turbo',
         messages: [
             {
                 role: 'user',
-                content: `give JSON array of steps for ${name} recipe`,
+                content: `give JSON array of steps with no numbers for ${name} recipe`,
             },
         ],
         temperature: 0,
@@ -186,14 +187,24 @@ const getRecipe = async (name) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    const steps = JSON.parse(response.choices[0].message.content)["steps"];
-    console.log(steps);
+    steps = JSON.parse(response.choices[0].message.content)["steps"];
+    
+    showRecipe();
+    
+    
+}
+const showRecipe = () => {
+    let stepsContainer = document.getElementById('stepsList');
+    console.log(stepsContainer);
+    stepsContainer.innerHTMl = "";
+    console.log("after");
+    console.log(stepsContainer);
+
     for (let i = 0; i < steps.length; i++)
     {
-        console.log(steps[i]);
+        
         stepsContainer.innerHTML += `<li>${steps[i]}</li>`;
     }
-    
 }
 
 },{"openai":12}],2:[function(require,module,exports){

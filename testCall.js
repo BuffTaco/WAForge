@@ -31,7 +31,7 @@ const getRecipe = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'give JSON array of steps for Cod with Garlic Butter recipe without linebreaks',
+                content: 'give JSON array of steps with no numbers for curry chicken recipe without linebreaks',
             },
         ],
         temperature: 0,
@@ -52,7 +52,7 @@ const oneRecipe = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'give json array of curry chic',
+                content: 'give json array of fried squid serving size and nutritional facts with no linebreaks and no whitespace',
             },
         ],
         temperature: 0,
@@ -64,4 +64,4 @@ const oneRecipe = async () => {
     console.log(response.choices[0].message);
     
 }
-oneRecipe();
+getRecipe();
