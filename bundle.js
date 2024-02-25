@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -194,9 +194,9 @@ const getRecipe = async (name) => {
     
 }
 const showRecipe = () => {
-    let stepsContainer = document.getElementById('stepsList');
+    const stepsContainer = document.getElementById('stepsList');
     console.log(stepsContainer);
-    stepsContainer.innerHTMl = "";
+    stepsContainer.innerHTML = "";
     console.log("after");
     console.log(stepsContainer);
 
