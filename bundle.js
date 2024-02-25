@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -41,10 +41,15 @@ const getResponse = async (ingredients) => {
     
 };
 //handle search
+const spinner = document.querySelector('.spinner');
+
+
 const recipeForm = document.querySelector('#recipe');
 recipeForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const ingredients = document.getElementById('ingredients').value;
+    
+    spinner.style.display = "block";
 
     getResponse(ingredients);
     recipeForm.reset();
@@ -112,6 +117,7 @@ const showList = () => {
         
     }
     recipeClicks();
+    spinner.style.display = "none";
 }
 let ascend = true;
 //sort by value
@@ -161,7 +167,8 @@ const recipeClicks = () => {
     {
         listItems[i].addEventListener('click', () => {
             
-            getRecipe(listItems[i].innerText)
+            getRecipe(listItems[i].innerText, listItems[i])
+            listItems[i].innerHTML += '<div class="spinnerSmall"></div>';
             
         })
     }
@@ -169,16 +176,13 @@ const recipeClicks = () => {
 
 let steps = [];
 //get recipe of selected item
-const getRecipe = async (name) => {
-    
-    
-
+const getRecipe = async (name, item) => {
     const response = await openai.chat.completions.create ({
         model: 'gpt-3.5-turbo',
         messages: [
             {
                 role: 'user',
-                content: `give JSON array of steps with no numbers for ${name} recipe`,
+                content: `give JSON array of steps with no numbers for ${name} recipe with no linebreaks`,
             },
         ],
         temperature: 0,
@@ -187,18 +191,21 @@ const getRecipe = async (name) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    steps = JSON.parse(response.choices[0].message.content)["steps"];
     
-    showRecipe();
+    steps = JSON.parse(response.choices[0].message.content);
+    
+    showRecipe(item);
     
     
 }
-const showRecipe = () => {
+const showRecipe = (item) => {
     const stepsContainer = document.getElementById('stepsList');
-    console.log(stepsContainer);
+    
+    item.innerHTML = item.innerHTML.replace('<div class="spinnerSmall"></div>', '');
+    console.log(item);
+    console.log(item.innerHTML);
     stepsContainer.innerHTML = "";
-    console.log("after");
-    console.log(stepsContainer);
+    console.log(steps);
 
     for (let i = 0; i < steps.length; i++)
     {

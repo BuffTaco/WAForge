@@ -172,7 +172,18 @@
       width: 25px;
       height: 25px;
       animation: spin 1s linear infinite;
+      display: none;
   }
+  .spinnerSmall {
+    border: 8px solid transparent;
+      border-top-color: #7983ff;
+      border-radius: 50%;
+      width: 5px;
+      height: 5px;
+      animation: spin 1s linear infinite;
+      display: block;
+  }
+  
 
   @keyframes spin {
       to {

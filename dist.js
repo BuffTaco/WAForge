@@ -1,7 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 const dishForm = document.querySelector('#recipe');
@@ -27,7 +27,7 @@ const oneRecipe = async (dish) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    const raw = response.choices[0].message;
+    const raw = response.choices[0].message.content;
     console.log(raw);
     
 }

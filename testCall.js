@@ -31,7 +31,7 @@ const getRecipe = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'give JSON array of steps with no numbers for curry chicken recipe without linebreaks',
+                content: 'give JSON array of steps with no numbers for Spaghetti Bolognese recipe with no linebreaks',
             },
         ],
         temperature: 0,
@@ -41,6 +41,7 @@ const getRecipe = async () => {
         presence_penalty: 0.0,
     });
     const raw = response.choices[0].message.content
+    console.log(raw);
     const processed = JSON.parse(raw);
     console.log(processed[0]);
     

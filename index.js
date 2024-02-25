@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -40,10 +40,15 @@ const getResponse = async (ingredients) => {
     
 };
 //handle search
+const spinner = document.querySelector('.spinner');
+
+
 const recipeForm = document.querySelector('#recipe');
 recipeForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const ingredients = document.getElementById('ingredients').value;
+    
+    spinner.style.display = "block";
 
     getResponse(ingredients);
     recipeForm.reset();
@@ -111,6 +116,7 @@ const showList = () => {
         
     }
     recipeClicks();
+    spinner.style.display = "none";
 }
 let ascend = true;
 //sort by value
@@ -160,7 +166,8 @@ const recipeClicks = () => {
     {
         listItems[i].addEventListener('click', () => {
             
-            getRecipe(listItems[i].innerText)
+            getRecipe(listItems[i].innerText, listItems[i])
+            listItems[i].innerHTML += '<div class="spinnerSmall"></div>';
             
         })
     }
@@ -168,16 +175,13 @@ const recipeClicks = () => {
 
 let steps = [];
 //get recipe of selected item
-const getRecipe = async (name) => {
-    
-    
-
+const getRecipe = async (name, item) => {
     const response = await openai.chat.completions.create ({
         model: 'gpt-3.5-turbo',
         messages: [
             {
                 role: 'user',
-                content: `give JSON array of steps with no numbers for ${name} recipe`,
+                content: `give JSON array of steps with no numbers for ${name} recipe with no linebreaks`,
             },
         ],
         temperature: 0,
@@ -186,18 +190,21 @@ const getRecipe = async (name) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
-    steps = JSON.parse(response.choices[0].message.content)["steps"];
     
-    showRecipe();
+    steps = JSON.parse(response.choices[0].message.content);
+    
+    showRecipe(item);
     
     
 }
-const showRecipe = () => {
+const showRecipe = (item) => {
     const stepsContainer = document.getElementById('stepsList');
-    console.log(stepsContainer);
+    
+    item.innerHTML = item.innerHTML.replace('<div class="spinnerSmall"></div>', '');
+    console.log(item);
+    console.log(item.innerHTML);
     stepsContainer.innerHTML = "";
-    console.log("after");
-    console.log(stepsContainer);
+    console.log(steps);
 
     for (let i = 0; i < steps.length; i++)
     {
