@@ -161,4 +161,18 @@
     background-size: 720px;
     background-position: 103% -5%;
   }
-  
+
+  .spinner {
+      border: 8px solid transparent;
+      border-top-color: #7983ff;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+      to {
+          transform: rotate(360deg);
+      }
+  }
