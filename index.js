@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
-const openai = new OpenAI({
-    apiKey: "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",
+let openai = new OpenAI({
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 
@@ -9,7 +9,9 @@ let objs = [];
 let names = [];
 
 const getResponse = async (ingredients) => {
-    const response = await openai.chat.completions.create ({
+    let response;
+    try {
+        response = await openai.chat.completions.create ({
         model: 'gpt-3.5-turbo',
         messages: [
             {
@@ -23,6 +25,31 @@ const getResponse = async (ingredients) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     });
+}
+    catch (e) {
+        console.log(e);
+        openai = new OpenAI({
+            apiKey: "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",
+            dangerouslyAllowBrowser: true
+        });
+        response = await openai.chat.completions.create ({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'user',
+                    content: `return json object with list of 10 dishes names, protein and sugar content in grams, and calories using ${ingredients} without linebreaks`,
+                },
+            ],
+            temperature: 0,
+            max_tokens: 500,
+            top_p: .1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+        });
+
+        
+
+    }
    
     const resRaw = JSON.parse(response.choices[0].message.content);
     console.log(resRaw);
@@ -176,20 +203,46 @@ const recipeClicks = () => {
 let steps = [];
 //get recipe of selected item
 const getRecipe = async (name, item) => {
-    const response = await openai.chat.completions.create ({
-        model: 'gpt-3.5-turbo',
-        messages: [
-            {
-                role: 'user',
-                content: `give JSON array of steps with no numbers for ${name} recipe with no linebreaks`,
-            },
-        ],
-        temperature: 0,
-        max_tokens: 500,
-        top_p: .1,
-        frequency_penalty: 0.0,
-        presence_penalty: 0.0,
-    });
+    let response;
+    try {
+        response = await openai.chat.completions.create ({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'user',
+                    content: `give JSON array of steps with no numbers for ${name} recipe with no linebreaks`,
+                },
+            ],
+            temperature: 0,
+            max_tokens: 500,
+            top_p: .1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+        });
+    }
+    catch (e) {
+        console.log(e);
+        openai = new OpenAI({
+            apiKey: "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",
+            dangerouslyAllowBrowser: true
+        });
+
+        response = await openai.chat.completions.create ({
+            model: 'gpt-3.5-turbo',
+            messages: [
+                {
+                    role: 'user',
+                    content: `give JSON array of steps with no numbers for ${name} recipe with no linebreaks`,
+                },
+            ],
+            temperature: 0,
+            max_tokens: 500,
+            top_p: .1,
+            frequency_penalty: 0.0,
+            presence_penalty: 0.0,
+        });
+    }
+    
     
     steps = JSON.parse(response.choices[0].message.content);
     
@@ -202,7 +255,8 @@ const showRecipe = (item) => {
     
     item.innerHTML = item.innerHTML.replace('<div class="spinnerSmall"></div>', '');
     stepsContainer.innerHTML = "";
-    
+    const recipeName = document.getElementById('recipeName');
+    recipeName.innerHTML = `<h3>${item.innerText}</h3>`
 
     for (let i = 0; i < steps.length; i++)
     {
