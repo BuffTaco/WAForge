@@ -169,6 +169,24 @@
     background-attachment: scroll;
     
   }
+  #dishDesc p {
+    font-family: 'Courier New', Courier, monospace;
+    color: #381d2a;
+    text-align: center;
+    font-size: 20px;
+  }
+  #dishDesc h4 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #381d2a;
+    text-align: center;
+    font-size: 20px;
+  }
+  #dishDesc h3 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #381d2a;
+    text-align: center;
+    font-size: 35px;
+  }
   
   
   

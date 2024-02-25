@@ -1,6 +1,6 @@
 const OpenAI = require("openai");
 let openai = new OpenAI({
-    apiKey: "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",
+    apiKey: "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",
     dangerouslyAllowBrowser: true
 });
 const spinner = document.querySelector('.spinner');
