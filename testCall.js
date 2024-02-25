@@ -53,7 +53,7 @@ const oneRecipe = async () => {
         messages: [
             {
                 role: 'user',
-                content: 'give json array of fried squid serving size and nutritional facts with no linebreaks and no whitespace',
+                content: 'give json array of fried squid serving size and nutritional facts with label with no linebreaks and no whitespace',
             },
         ],
         temperature: 0,
@@ -65,4 +65,4 @@ const oneRecipe = async () => {
     console.log(response.choices[0].message);
     
 }
-getRecipe();
+oneRecipe();
