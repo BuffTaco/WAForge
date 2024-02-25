@@ -195,7 +195,7 @@ const getRecipe = async (name) => {
 const showRecipe = () => {
     const stepsContainer = document.getElementById('stepsList');
     console.log(stepsContainer);
-    stepsContainer.innerHTMl = "";
+    stepsContainer.innerHTML = "";
     console.log("after");
     console.log(stepsContainer);
 
